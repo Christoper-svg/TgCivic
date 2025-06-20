@@ -533,14 +533,277 @@ const Dashboard = () => {
               </Card>
             </TabsContent>
 
-            <TabsContent value="users">
-              <Card className="bg-white p-8 text-center">
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
-                  User Management
-                </h3>
-                <p className="text-gray-600">
-                  User administration and management features.
-                </p>
+            {/* Users Tab */}
+            <TabsContent value="users" className="space-y-6">
+              {/* User Management Header */}
+              <div className="flex justify-between items-center">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    User Management
+                  </h2>
+                  <p className="text-gray-600">
+                    Manage citizens and admin accounts
+                  </p>
+                </div>
+                <Button className="bg-green-600 hover:bg-green-700">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add New User
+                </Button>
+              </div>
+
+              {/* User Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <Card className="bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-gray-600">Total Users</p>
+                        <p className="text-2xl font-bold text-gray-900">
+                          1,247
+                        </p>
+                        <p className="text-xs text-gray-500">+12% this month</p>
+                      </div>
+                      <Users className="w-8 h-8 text-blue-600" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-gray-600">Citizens</p>
+                        <p className="text-2xl font-bold text-gray-900">
+                          1,198
+                        </p>
+                        <p className="text-xs text-gray-500">Active users</p>
+                      </div>
+                      <User className="w-8 h-8 text-green-600" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-gray-600">Admins</p>
+                        <p className="text-2xl font-bold text-gray-900">49</p>
+                        <p className="text-xs text-gray-500">
+                          System administrators
+                        </p>
+                      </div>
+                      <Shield className="w-8 h-8 text-red-600" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-gray-600">Active Today</p>
+                        <p className="text-2xl font-bold text-gray-900">342</p>
+                        <p className="text-xs text-gray-500">Online users</p>
+                      </div>
+                      <Activity className="w-8 h-8 text-purple-600" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* User Filters */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1">
+                  <Input
+                    placeholder="Search users by name, email, or phone..."
+                    className="w-full"
+                  />
+                </div>
+                <Select defaultValue="all">
+                  <SelectTrigger className="w-48">
+                    <SelectValue placeholder="User Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Users</SelectItem>
+                    <SelectItem value="citizen">Citizens</SelectItem>
+                    <SelectItem value="admin">Admins</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select defaultValue="active">
+                  <SelectTrigger className="w-48">
+                    <SelectValue placeholder="Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Status</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="inactive">Inactive</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Users Table */}
+              <Card className="bg-white">
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <CardTitle>All Users</CardTitle>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm">
+                      <Filter className="w-4 h-4 mr-2" />
+                      Filter
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Download className="w-4 h-4 mr-2" />
+                      Export
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b border-gray-200">
+                          <th className="text-left py-3 px-4 font-medium text-gray-700">
+                            User
+                          </th>
+                          <th className="text-left py-3 px-4 font-medium text-gray-700">
+                            Type
+                          </th>
+                          <th className="text-left py-3 px-4 font-medium text-gray-700">
+                            Department
+                          </th>
+                          <th className="text-left py-3 px-4 font-medium text-gray-700">
+                            Last Login
+                          </th>
+                          <th className="text-left py-3 px-4 font-medium text-gray-700">
+                            Status
+                          </th>
+                          <th className="text-left py-3 px-4 font-medium text-gray-700">
+                            Actions
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[
+                          {
+                            name: "Rajesh Kumar",
+                            email: "rajesh@email.com",
+                            phone: "+91 98765 43210",
+                            type: "Citizen",
+                            department: "-",
+                            lastLogin: "2 hours ago",
+                            status: "Active",
+                            avatar: "RK",
+                          },
+                          {
+                            name: "Admin User",
+                            email: "admin@tgcivic.gov.in",
+                            phone: "+91 99999 99999",
+                            type: "Admin",
+                            department: "IT Department",
+                            lastLogin: "5 minutes ago",
+                            status: "Active",
+                            avatar: "AU",
+                          },
+                          {
+                            name: "Priya Sharma",
+                            email: "priya@email.com",
+                            phone: "+91 98765 43211",
+                            type: "Citizen",
+                            department: "-",
+                            lastLogin: "1 day ago",
+                            status: "Active",
+                            avatar: "PS",
+                          },
+                          {
+                            name: "GHMC Officer",
+                            email: "officer@ghmc.gov.in",
+                            phone: "+91 98765 43212",
+                            type: "Admin",
+                            department: "GHMC",
+                            lastLogin: "3 hours ago",
+                            status: "Active",
+                            avatar: "GO",
+                          },
+                          {
+                            name: "Mohammed Ali",
+                            email: "mohammed@email.com",
+                            phone: "+91 98765 43213",
+                            type: "Citizen",
+                            department: "-",
+                            lastLogin: "5 days ago",
+                            status: "Inactive",
+                            avatar: "MA",
+                          },
+                        ].map((user, index) => (
+                          <tr
+                            key={index}
+                            className="border-b border-gray-100 hover:bg-gray-50"
+                          >
+                            <td className="py-4 px-4">
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-medium">
+                                  {user.avatar}
+                                </div>
+                                <div>
+                                  <div className="font-medium text-gray-900">
+                                    {user.name}
+                                  </div>
+                                  <div className="text-sm text-gray-500">
+                                    {user.email}
+                                  </div>
+                                  <div className="text-xs text-gray-400">
+                                    {user.phone}
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="py-4 px-4">
+                              <Badge
+                                className={
+                                  user.type === "Admin"
+                                    ? "bg-red-100 text-red-800"
+                                    : "bg-blue-100 text-blue-800"
+                                }
+                              >
+                                {user.type}
+                              </Badge>
+                            </td>
+                            <td className="py-4 px-4 text-sm text-gray-600">
+                              {user.department}
+                            </td>
+                            <td className="py-4 px-4 text-sm text-gray-600">
+                              {user.lastLogin}
+                            </td>
+                            <td className="py-4 px-4">
+                              <Badge
+                                className={
+                                  user.status === "Active"
+                                    ? "bg-green-100 text-green-800"
+                                    : "bg-gray-100 text-gray-800"
+                                }
+                              >
+                                {user.status}
+                              </Badge>
+                            </td>
+                            <td className="py-4 px-4">
+                              <div className="flex items-center space-x-2">
+                                <Button variant="ghost" size="sm">
+                                  <Eye className="w-4 h-4" />
+                                </Button>
+                                <Button variant="ghost" size="sm">
+                                  <Edit className="w-4 h-4" />
+                                </Button>
+                                <Button variant="ghost" size="sm">
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </CardContent>
               </Card>
             </TabsContent>
 
