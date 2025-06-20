@@ -739,7 +739,7 @@ const Index = () => {
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 transform translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
                         <Rocket className="w-6 h-6 mr-3 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300" />
-                        Get Started
+                        {t("get_started")}
                       </Button>
                     </Link>
                     <Button
