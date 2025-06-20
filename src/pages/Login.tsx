@@ -125,9 +125,6 @@ const Login = () => {
           </p>
         </div>
 
-        {/* Database Status */}
-        <DatabaseStatus />
-
         {/* Demo Accounts */}
         <Card className="bg-blue-50 border-blue-200">
           <CardHeader className="pb-3">
