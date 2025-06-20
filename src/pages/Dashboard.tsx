@@ -179,92 +179,72 @@ const Dashboard = () => {
             <TabsContent value="overview" className="space-y-6">
               {/* Key Metrics */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="bg-white">
+                <Card className="bg-white border-0 shadow-sm">
                   <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">
-                          Resolution Rate
-                        </p>
-                        <p className="text-3xl font-bold text-green-600">
-                          {resolutionRate}%
-                        </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Average resolution rate this month
-                        </p>
+                    <div className="text-center">
+                      <h3 className="text-sm font-medium text-gray-600 mb-2">
+                        Resolution Rate
+                      </h3>
+                      <div className="text-4xl font-bold text-green-600 mb-1">
+                        {resolutionRate}%
                       </div>
-                      <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                        <TrendingUp className="w-6 h-6 text-green-600" />
-                      </div>
+                      <p className="text-xs text-gray-500">
+                        Average resolution rate this month
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white">
+                <Card className="bg-white border-0 shadow-sm">
                   <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">
-                          Avg Resolution Time
-                        </p>
-                        <p className="text-3xl font-bold text-blue-600">
-                          {avgResolutionTime}
-                        </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Days on average
-                        </p>
+                    <div className="text-center">
+                      <h3 className="text-sm font-medium text-gray-600 mb-2">
+                        Avg Resolution Time
+                      </h3>
+                      <div className="text-4xl font-bold text-blue-600 mb-1">
+                        {avgResolutionTime}
                       </div>
-                      <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <Clock className="w-6 h-6 text-blue-600" />
-                      </div>
+                      <p className="text-xs text-gray-500">Days on average</p>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white">
+                <Card className="bg-white border-0 shadow-sm">
                   <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">
-                          User Satisfaction
-                        </p>
-                        <p className="text-3xl font-bold text-yellow-600">
-                          {userSatisfaction}★
-                        </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Average rating
-                        </p>
+                    <div className="text-center">
+                      <h3 className="text-sm font-medium text-gray-600 mb-2">
+                        User Satisfaction
+                      </h3>
+                      <div className="text-4xl font-bold text-yellow-600 mb-1">
+                        {userSatisfaction}★
                       </div>
-                      <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                        <Star className="w-6 h-6 text-yellow-600" />
-                      </div>
+                      <p className="text-xs text-gray-500">Average rating</p>
                     </div>
                   </CardContent>
                 </Card>
               </div>
 
               {/* Category Distribution */}
-              <Card className="bg-white">
-                <CardHeader>
-                  <CardTitle className="text-xl font-bold text-gray-900">
+              <Card className="bg-white border-0 shadow-sm">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-lg font-semibold text-gray-900">
                     Category Distribution
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-4">
                   {categoryData.map((category, index) => (
                     <div key={category.name} className="space-y-2">
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-medium text-gray-700">
                           {category.name}
                         </span>
-                        <span className="text-sm text-gray-500">
+                        <span className="text-sm font-medium text-gray-900">
                           {category.count}
                         </span>
                       </div>
-                      <div className="relative">
-                        <Progress value={category.percentage} className="h-2" />
+                      <div className="relative h-2 bg-gray-100 rounded-full overflow-hidden">
                         <div
-                          className={`absolute top-0 left-0 h-2 ${category.color} rounded-full transition-all duration-500`}
+                          className={`absolute top-0 left-0 h-full ${category.color} rounded-full transition-all duration-1000 ease-out`}
                           style={{ width: `${category.percentage}%` }}
                         />
                       </div>
