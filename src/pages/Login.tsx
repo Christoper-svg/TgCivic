@@ -140,7 +140,11 @@ const Login = () => {
               <div
                 key={index}
                 onClick={() =>
-                  fillDemoCredentials(account.email, account.password)
+                  fillDemoCredentials(
+                    account.email,
+                    account.password,
+                    account.userType,
+                  )
                 }
                 className="flex items-center justify-between p-3 bg-white rounded-lg border border-blue-200 cursor-pointer hover:shadow-sm transition-shadow"
               >
