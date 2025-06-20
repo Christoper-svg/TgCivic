@@ -411,7 +411,9 @@ const Navigation = () => {
                           key={item.href}
                           to={item.href}
                           onClick={() => setIsOpen(false)}
-                          className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                          className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 nav-text ${
+                            language === "te" ? "telugu-text" : ""
+                          } ${
                             isActiveRoute(item.href)
                               ? "text-blue-600 bg-blue-50 shadow-sm"
                               : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
