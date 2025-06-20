@@ -73,43 +73,17 @@ const Dashboard = () => {
     { name: "Street Lights", count: 23, color: "bg-purple-500", percentage: 6 },
   ];
 
-  // Schemes data
+  // Schemes data from context
+  const topScheme = getMostViewedScheme();
   const schemesData = {
-    totalSchemes: 6,
-    totalViews: 797,
-    topScheme: "TS MeeSeva",
-    topSchemeViews: 2100,
-    categories: 5,
+    totalSchemes: schemes.length,
+    totalViews: getTotalViews(),
+    topScheme: topScheme?.name || "N/A",
+    topSchemeViews: topScheme?.views || 0,
+    categories: getAllCategories().length,
   };
 
-  const allSchemes = [
-    {
-      name: "Rythu Bandhu",
-      description:
-        "Financial assistance to farmers for procurement of inputs for cultivation per season",
-      category: "Farmers",
-      department: "Agriculture Department",
-      views: 1250,
-      status: "Active",
-    },
-    {
-      name: "Aasara Pension",
-      description: "Monthly pension for elderly, widows, and disabled persons",
-      category: "Senior Citizens",
-      department: "Social Welfare Department",
-      views: 930,
-      status: "Active",
-    },
-    {
-      name: "Kalyana Lakshmi",
-      description:
-        "Financial assistance for marriage of daughters from economically weaker sections",
-      category: "Women",
-      department: "Women and Child Welfare",
-      views: 785,
-      status: "Active",
-    },
-  ];
+  const allSchemes = schemes.slice(0, 3); // Show top 3 schemes
 
   return (
     <div className="min-h-screen bg-gray-50">
