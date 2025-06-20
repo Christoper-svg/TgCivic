@@ -109,7 +109,7 @@ const translations = {
   join_digital_revolution: {
     en: "Join the digital revolution in civic engagement. Report issues, track progress, and see real change happen in your community with TG Civic.",
     hi: "नागरिक भागीदारी में डिजिटल क्रांति में शामिल हों। समस्याओं की रिपोर्ट करें, प्रगति को ट्रैक करें, और TG Civic के साथ अपने समुदाय में वास्तविक बदलाव देखें।",
-    te: "పౌర భాగస్వామ్యంలో డిజిటల్ విప్లవంలో చేరండి. సమస్యలను నివేదించండి, పురోగతిని ట్రాక్ చేయండి మరియు TG Civic తో మీ కమ్యూనిటీలో నిజమైన మార్పును చూడండి.",
+    te: "పౌర భాగస్���ామ్యంలో డిజిటల్ విప్లవంలో చేరండి. సమస్యలను నివేదించండి, పురోగతిని ట్రాక్ చేయండి మరియు TG Civic తో మీ కమ్యూనిటీలో నిజమైన మార్పును చూడండి.",
   },
   report_an_issue: {
     en: "Report an Issue",
@@ -361,7 +361,7 @@ const translations = {
   ai_greeting: {
     en: "Hello! I'm your TG Civic AI assistant. I can help you with complaint registration, tracking, and answer your questions. How can I assist you today?",
     hi: "नमस्ते! मैं आपका TG Civic AI सहायक हूं। मैं शिकायत पंजीकरण, ट्रैकिंग में आपकी मदद कर सकता हूं और आपके प्रश्नों का उत्तर दे सकता हूं। आज मैं आपकी कैसे सहायता कर सकता हूं?",
-    te: "నమస్కారం! నేను మీ TG Civic AI అసిస్టెంట్. నేను ఫిర్యాదు నమోదు, ట్రాకింగ్‌లో మీకు స���ాయం చేయగలను మరియు మీ ప్రశ్నలకు సమాధానాలు ఇవ్వగలను. ఈ రోజు నేను మీకు ఎలా సహాయం చేయగలను?",
+    te: "నమస్కారం! నేను మీ TG Civic AI అసిస్టెంట్. నేను ఫిర్యాద�� నమోదు, ట్రాకింగ్‌లో మీకు స���ాయం చేయగలను మరియు మీ ప్రశ్నలకు సమాధానాలు ఇవ్వగలను. ఈ రోజు నేను మీకు ఎలా సహాయం చేయగలను?",
   },
   ai_online_status: {
     en: "Online • Ready to help",
@@ -370,13 +370,13 @@ const translations = {
   },
   ai_register_help: {
     en: "To register a complaint: 1) Click 'Register Complaint' in the navigation, 2) Select your issue category (roads, water, etc.), 3) Fill in all details including photos and location, 4) Submit to get your tracking ID. Would you like me to guide you through a specific step?",
-    hi: "शिकायत दर्ज करने के लिए: 1) नेवीगेशन में 'शिकायत दर्ज करें' पर क्लिक करें, 2) अपनी समस्या की श्रेणी चुनें (सड़कें, पानी, आदि), 3) फोटो और स्थान सहित सभी विवरण भरें, 4) अपना ट्रैकिंग ID प्राप्त करने के लिए सबमिट करें। क्या आप चाहेंगे कि मैं आपको किसी विशेष चरण के माध्यम से मार्गदर्शन करूं?",
+    hi: "शिकायत दर्ज करने के लिए: 1) नेवीगेशन में 'शिकायत दर्ज करें' पर क्लिक करें, 2) अपनी स���स्या की श्रेणी चुनें (सड़कें, पानी, आदि), 3) फोटो और स्थान सहित सभी विवरण भरें, 4) अपना ट्रैकिंग ID प्राप्त करने के लिए सबमिट करें। क्या आप चाहेंगे कि मैं आपको किसी विशेष चरण के माध्यम से मार्गदर्शन करूं?",
     te: "ఫిర్యాదు నమోదు చేయడానికి: 1) నావిగేషన్‌లో 'ఫిర్యాదు నమోదు' మీద క్లిక్ చేయండి, 2) మీ సమస్య వర్గాన్ని ఎంచుకోండి (రోడ్లు, నీరు, మొదలైనవి), 3) ఫోటోలు మరియు లొకేషన్‌తో సహా అన్ని వివరాలను పూరించండి, 4) మీ ట్రాకింగ్ ID పొందడానికి సమర్పించండి. నేను మిమ్మల్ని ఏదైనా నిర్దిష్ట దశ ద్వారా మార్గదర్శనం చేయాలని మీరు అనుకుంటున్నారా?",
   },
   ai_track_help: {
     en: "To track your complaint: 1) Go to 'Track Complaint' page, 2) Enter your complaint ID (format: TGC2024XXXXXX) or phone number, 3) View complete status history and details. Do you have your complaint ID?",
     hi: "अपनी शिकायत को ट्रैक करने के लिए: 1) 'शिकायत ट्र���क करें' पेज पर जाएं, 2) अपना शिकायत ID (प्रारूप: TGC2024XXXXXX) या फोन नंबर दर्ज करें, 3) पूर्ण स्थिति इतिहास और विवरण देखें। क्या आपके पास अपना शिकायत ID है?",
-    te: "మీ ఫిర్యాదును ట్రాక్ చేయడానికి: 1) 'ఫిర్యాదు ట్రాక్ చేయండి' పేజీకి వెళ్లండి, 2) మీ ఫిర్యాదు ID (ఫార్మాట్: TGC2024XXXXXX) లేదా ఫోన్ నంబర్ నమోదు చేయండి, 3) పూర్తి స్థితి చరిత్ర మరియు వివరాలను చూడండి. మీ దగ్గర మీ ఫిర్యాదు ID ఉందా?",
+    te: "మీ ఫిర్యాదును ట్రాక్ చేయడానికి: 1) 'ఫిర్యాదు ట్రాక్ చేయండి' పేజీకి వెళ్లండి, 2) మీ ఫిర్యాదు ID (ఫార్మాట్: TGC2024XXXXXX) లేదా ఫోన్ నంబర్ నమోదు ��ేయండి, 3) పూర్తి స్థితి చరిత్ర మరియు వివరాలను చూడండి. మీ దగ్గర మీ ఫిర్యాదు ID ఉందా?",
   },
   ai_time_help: {
     en: "Resolution times vary by issue type: Roads (3-7 days), Water (2-5 days), Street lights (1-2 days), Sanitation (1-3 days). You'll receive SMS/email updates throughout the process. Is there a specific type of issue you're asking about?",
@@ -385,7 +385,7 @@ const translations = {
   },
   ai_photo_help: {
     en: "You can upload up to 5 photos during complaint registration. Photos help officials understand the problem better. Supported formats: JPG, PNG, WebP. Click the camera icon or drag photos to the upload area.",
-    hi: "शिकायत पंजीकरण के दौरान आप 5 तक फोटो अपलोड कर सकते हैं। फोटो अधिकारियों को समस्या को बेहतर ढंग से समझने में मदद करती हैं। समर्थित प्रारूप: JPG, PNG, WebP। कैमरा आइकन पर क्लिक करें या फोटो को अपलोड क्षेत्र में खींचें।",
+    hi: "शिकायत पंजीकरण के दौरान आप 5 तक फोटो अपलोड कर सकते हैं। फोटो अधिकारियों को समस्या को बेहतर ढंग से समझने में मदद करती हैं। समर्थित प्रारूप: JPG, PNG, WebP। कैमरा आइकन पर क्लिक करें या फोट��� को अपलोड क्षेत्र में खींचें।",
     te: "ఫిర్యాదు నమోదు సమయంలో మీరు 5 ఫోటోలు వరకు అప్‌లోడ్ చేయవచ్చు. ఫోటోలు అధికారులకు సమస్యను బాగా అర్థం చేసుకోవడంలో సహాయపడతాయి. మద్దతు ఉన్న ఫార్మాట్‌లు: JPG, PNG, WebP. కెమెరా ఐకాన్‌పై క్లిక్ చేయండి లేదా ఫోటోలను అప్‌లోడ్ ప్రాంతానికి లాగండి.",
   },
   ai_location_help: {
@@ -431,7 +431,7 @@ const translations = {
   ai_quick_time: {
     en: "How long to resolve?",
     hi: "हल होने में कितना समय?",
-    te: "పరిష్కరించడానికి ఎంత సమయం?",
+    te: "పరిష���కరించడానికి ఎంత సమయం?",
   },
   ai_quick_support: {
     en: "Contact support",
