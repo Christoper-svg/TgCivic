@@ -54,10 +54,13 @@ const RegisterComplaint = () => {
   const navigate = useNavigate();
   const { addComplaint } = useComplaints();
   const { addNotification } = useNotifications();
-  const [language] = useState("en");
+  const { language } = useLanguage();
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [complaintId, setComplaintId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [isGettingLocation, setIsGettingLocation] = useState(false);
+  const recognitionRef = useRef<any>(null);
 
   const [formData, setFormData] = useState({
     category: "",
@@ -71,6 +74,8 @@ const RegisterComplaint = () => {
     phone: "",
     email: "",
     images: [] as File[],
+    latitude: undefined as number | undefined,
+    longitude: undefined as number | undefined,
   });
 
   const categories = [
