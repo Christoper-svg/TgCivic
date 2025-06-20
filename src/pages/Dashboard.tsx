@@ -160,13 +160,25 @@ const Dashboard = () => {
       icon: <Clock className="w-6 h-6" />,
       color: "text-yellow-600",
     },
-    {
-      title: "Pending",
-      value: stats.pending.toString(),
-      change: "-12.5%",
-      icon: <AlertTriangle className="w-6 h-6" />,
-      color: "text-red-600",
-    },
+    ...(isAdmin
+      ? [
+          {
+            title: "Active Schemes",
+            value: schemes.filter((s) => s.isActive).length.toString(),
+            change: "+3.4%",
+            icon: <Gift className="w-6 h-6" />,
+            color: "text-purple-600",
+          },
+        ]
+      : [
+          {
+            title: "Pending",
+            value: stats.pending.toString(),
+            change: "-12.5%",
+            icon: <AlertTriangle className="w-6 h-6" />,
+            color: "text-red-600",
+          },
+        ]),
   ];
 
   // Filter complaints
