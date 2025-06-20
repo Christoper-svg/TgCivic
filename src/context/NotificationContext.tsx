@@ -198,7 +198,8 @@ export const NotificationProvider = ({ children }: { children: ReactNode }) => {
       prev.map((notification) =>
         notification.userId === user.id ||
         notification.userId === "all" ||
-        notification.userRole === user.role
+        notification.userRole === user.userType ||
+        (user.userType === "admin" && notification.userId === "all-admins")
           ? { ...notification, isRead: true }
           : notification,
       ),
