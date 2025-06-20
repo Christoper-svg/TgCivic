@@ -136,7 +136,7 @@ const Register = () => {
         <div className="flex justify-start">
           <Button
             variant="ghost"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/")}
             className="text-gray-600 hover:text-gray-900 -ml-2"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
