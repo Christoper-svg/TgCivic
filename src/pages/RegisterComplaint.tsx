@@ -145,6 +145,119 @@ const RegisterComplaint = () => {
     setFormData({ ...formData, images: newImages });
   };
 
+  // Voice Recognition Functions
+  useEffect(() => {
+    if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
+      const SpeechRecognition =
+        (window as any).SpeechRecognition ||
+        (window as any).webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+
+      // Set language based on current selection
+      switch (language) {
+        case "hi":
+          recognitionRef.current.lang = "hi-IN";
+          break;
+        case "te":
+          recognitionRef.current.lang = "te-IN";
+          break;
+        default:
+          recognitionRef.current.lang = "en-IN";
+      }
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setFormData((prev) => ({
+          ...prev,
+          description:
+            prev.description + (prev.description ? " " : "") + transcript,
+        }));
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
+  }, [language]);
+
+  const startVoiceRecognition = () => {
+    if (recognitionRef.current && !isListening) {
+      setIsListening(true);
+      recognitionRef.current.start();
+    }
+  };
+
+  const stopVoiceRecognition = () => {
+    if (recognitionRef.current && isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    }
+  };
+
+  // GPS Location Functions
+  const getCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    setIsGettingLocation(true);
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+
+        // Update form data with coordinates
+        setFormData((prev) => ({
+          ...prev,
+          latitude,
+          longitude,
+        }));
+
+        // Try to get address from coordinates using reverse geocoding
+        try {
+          const response = await fetch(
+            `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=YOUR_API_KEY`,
+          );
+          if (response.ok) {
+            const data = await response.json();
+            const address =
+              data.results[0]?.formatted ||
+              `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+            setFormData((prev) => ({
+              ...prev,
+              location: address,
+            }));
+          }
+        } catch (error) {
+          // Fallback to coordinates if reverse geocoding fails
+          setFormData((prev) => ({
+            ...prev,
+            location: `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`,
+          }));
+        }
+
+        setIsGettingLocation(false);
+      },
+      (error) => {
+        console.error("Error getting location:", error);
+        alert("Unable to get your location. Please enter it manually.");
+        setIsGettingLocation(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 60000,
+      },
+    );
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
