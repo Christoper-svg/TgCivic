@@ -361,6 +361,98 @@ const Dashboard = () => {
     a.click();
   };
 
+  // Scheme Management Handlers
+  const handleAddScheme = () => {
+    setSchemeForm({
+      name: "",
+      description: "",
+      category: "",
+      eligibility: "",
+      requiredDocuments: "",
+      benefits: "",
+      applicationProcess: "",
+      applyLink: "",
+      department: "",
+      validUntil: "",
+    });
+    setSelectedScheme(null);
+    setShowSchemeDialog(true);
+  };
+
+  const handleEditScheme = (scheme: any) => {
+    setSchemeForm({
+      name: scheme.name,
+      description: scheme.description,
+      category: scheme.category,
+      eligibility: scheme.eligibility.join("\n"),
+      requiredDocuments: scheme.requiredDocuments.join("\n"),
+      benefits: scheme.benefits,
+      applicationProcess: scheme.applicationProcess,
+      applyLink: scheme.applyLink,
+      department: scheme.department,
+      validUntil: scheme.validUntil || "",
+    });
+    setSelectedScheme(scheme);
+    setShowSchemeDialog(true);
+  };
+
+  const handleDeleteScheme = (scheme: any) => {
+    setSelectedScheme(scheme);
+    setShowDeleteSchemeDialog(true);
+  };
+
+  const confirmDeleteScheme = () => {
+    if (selectedScheme) {
+      deleteScheme(selectedScheme.id);
+      setShowDeleteSchemeDialog(false);
+      setSelectedScheme(null);
+    }
+  };
+
+  const handleSchemeSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const schemeData = {
+      name: schemeForm.name,
+      description: schemeForm.description,
+      category: schemeForm.category,
+      eligibility: schemeForm.eligibility
+        .split("\n")
+        .filter((item) => item.trim()),
+      requiredDocuments: schemeForm.requiredDocuments
+        .split("\n")
+        .filter((item) => item.trim()),
+      benefits: schemeForm.benefits,
+      applicationProcess: schemeForm.applicationProcess,
+      applyLink: schemeForm.applyLink,
+      department: schemeForm.department,
+      validUntil: schemeForm.validUntil,
+      isActive: true,
+    };
+
+    if (selectedScheme) {
+      // Edit existing scheme
+      updateScheme(selectedScheme.id, schemeData);
+    } else {
+      // Add new scheme
+      addScheme(schemeData);
+    }
+
+    setShowSchemeDialog(false);
+  };
+
+  const categories = [
+    "Agriculture",
+    "Health",
+    "Social Welfare",
+    "Education",
+    "Employment",
+    "Housing",
+    "Women & Child Development",
+    "Senior Citizens",
+    "Disabled Welfare",
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       {/* Navigation */}
