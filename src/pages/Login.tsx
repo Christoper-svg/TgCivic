@@ -37,6 +37,7 @@ const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    userType: "citizen" as UserType,
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -48,12 +49,16 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    if (!formData.email || !formData.password) {
+    if (!formData.email || !formData.password || !formData.userType) {
       setError("Please fill in all fields");
       return;
     }
 
-    const success = await login(formData.email, formData.password);
+    const success = await login(
+      formData.email,
+      formData.password,
+      formData.userType,
+    );
 
     if (success) {
       navigate(from, { replace: true });
@@ -67,30 +72,28 @@ const Login = () => {
       role: "Admin",
       email: "admin@tgcivic.gov.in",
       password: "admin123",
+      userType: "admin" as UserType,
       description: "Full access to dashboard and management",
       icon: <Shield className="w-4 h-4" />,
       color: "bg-red-100 text-red-800",
     },
     {
       role: "Citizen",
-      email: "rajesh@email.com",
+      email: "citizen@email.com",
       password: "citizen123",
+      userType: "citizen" as UserType,
       description: "Register and track complaints",
       icon: <User className="w-4 h-4" />,
       color: "bg-blue-100 text-blue-800",
     },
-    {
-      role: "Official",
-      email: "officer@ghmc.gov.in",
-      password: "official123",
-      description: "Manage assigned complaints",
-      icon: <Users className="w-4 h-4" />,
-      color: "bg-green-100 text-green-800",
-    },
   ];
 
-  const fillDemoCredentials = (email: string, password: string) => {
-    setFormData({ email, password });
+  const fillDemoCredentials = (
+    email: string,
+    password: string,
+    userType: UserType,
+  ) => {
+    setFormData({ email, password, userType });
     setError("");
   };
 
