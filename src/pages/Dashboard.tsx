@@ -33,9 +33,54 @@ const Dashboard = () => {
   const { user } = useAuth();
   const { complaints, getComplaintStats } = useComplaints();
   const { notifications, unreadCount } = useNotifications();
-  const { schemes, getTotalViews, getMostViewedScheme, getAllCategories } =
-    useSchemes();
+  const {
+    schemes,
+    getTotalViews,
+    getMostViewedScheme,
+    getAllCategories,
+    updateScheme,
+    deleteScheme,
+    addScheme,
+    getSchemeById,
+  } = useSchemes();
   const [activeTab, setActiveTab] = useState("overview");
+  const [selectedScheme, setSelectedScheme] = useState<any>(null);
+  const [isSchemeModalOpen, setIsSchemeModalOpen] = useState(false);
+  const [schemeModalMode, setSchemeModalMode] = useState<
+    "view" | "edit" | "create"
+  >("view");
+
+  const handleViewScheme = (scheme: any) => {
+    setSelectedScheme(scheme);
+    setSchemeModalMode("view");
+    setIsSchemeModalOpen(true);
+  };
+
+  const handleEditScheme = (scheme: any) => {
+    setSelectedScheme(scheme);
+    setSchemeModalMode("edit");
+    setIsSchemeModalOpen(true);
+  };
+
+  const handleCreateScheme = () => {
+    setSelectedScheme(null);
+    setSchemeModalMode("create");
+    setIsSchemeModalOpen(true);
+  };
+
+  const handleSaveScheme = (schemeData: any) => {
+    if (schemeModalMode === "create") {
+      addScheme(schemeData);
+    } else if (schemeModalMode === "edit" && selectedScheme) {
+      updateScheme(selectedScheme.id, schemeData);
+    }
+    setIsSchemeModalOpen(false);
+  };
+
+  const handleDeleteScheme = (schemeId: string) => {
+    deleteScheme(schemeId);
+    setIsSchemeModalOpen(false);
+  };
 
   // Redirect non-admin users
   if (!user || user.userType !== "admin") {
