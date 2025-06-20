@@ -356,6 +356,45 @@ export const SchemesProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const updateScheme = (id: string, updates: Partial<Scheme>): boolean => {
+    setSchemes((prevSchemes) =>
+      prevSchemes.map((scheme) =>
+        scheme.id === id
+          ? { ...scheme, ...updates, updatedAt: new Date().toISOString() }
+          : scheme,
+      ),
+    );
+    return true;
+  };
+
+  const deleteScheme = (id: string): boolean => {
+    const schemeExists = schemes.some((scheme) => scheme.id === id);
+    if (schemeExists) {
+      setSchemes((prevSchemes) =>
+        prevSchemes.filter((scheme) => scheme.id !== id),
+      );
+      return true;
+    }
+    return false;
+  };
+
+  const addScheme = (
+    schemeData: Omit<Scheme, "id" | "createdAt" | "updatedAt">,
+  ): string => {
+    const id = `scheme-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const now = new Date().toISOString();
+
+    const newScheme: Scheme = {
+      ...schemeData,
+      id,
+      createdAt: now,
+      updatedAt: now,
+    };
+
+    setSchemes((prevSchemes) => [newScheme, ...prevSchemes]);
+    return id;
+  };
+
   const value: SchemesContextType = {
     schemes,
     getSchemeById,
@@ -365,6 +404,9 @@ export const SchemesProvider = ({ children }: { children: ReactNode }) => {
     getMostViewedScheme,
     incrementViews,
     searchSchemes,
+    updateScheme,
+    deleteScheme,
+    addScheme,
   };
 
   return (
