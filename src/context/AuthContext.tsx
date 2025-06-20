@@ -63,41 +63,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Mock users database
-  const mockUsers = [
-    {
-      id: "admin-001",
-      name: "Admin User",
-      email: "admin@tgcivic.gov.in",
-      phone: "9876543210",
-      role: "admin" as const,
-      department: "IT Department",
-      password: "admin123",
-      createdAt: "2024-01-01T00:00:00Z",
-      lastLogin: new Date().toISOString(),
-    },
-    {
-      id: "citizen-001",
-      name: "Rajesh Kumar",
-      email: "rajesh@email.com",
-      phone: "9876543211",
-      role: "citizen" as const,
-      password: "citizen123",
-      createdAt: "2024-01-15T00:00:00Z",
-      lastLogin: new Date().toISOString(),
-    },
-    {
-      id: "official-001",
-      name: "GHMC Officer",
-      email: "officer@ghmc.gov.in",
-      phone: "9876543212",
-      role: "official" as const,
-      department: "GHMC Roads Department",
-      password: "official123",
-      createdAt: "2024-01-01T00:00:00Z",
-      lastLogin: new Date().toISOString(),
-    },
-  ];
+  // Convert AuthUser to User format
+  const convertAuthUser = (authUser: AuthUser): User => ({
+    id: authUser.id,
+    name: authUser.name,
+    email: authUser.email,
+    phone: authUser.phone,
+    userType: authUser.userType,
+    role: authUser.role,
+    department: authUser.department,
+    isActive: authUser.isActive,
+    createdAt: authUser.createdAt,
+    lastLogin: authUser.lastLogin,
+  });
 
   // Load user from localStorage on mount
   useEffect(() => {
@@ -123,25 +101,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [user]);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (
+    email: string,
+    password: string,
+    userType: UserType,
+  ): Promise<boolean> => {
     setIsLoading(true);
 
     try {
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const loginData: LoginData = { email, password, userType };
+      const authUser = await authService.login(loginData);
 
-      // Find user in mock database
-      const foundUser = mockUsers.find(
-        (u) => u.email === email && u.password === password,
-      );
-
-      if (foundUser) {
-        const { password: _, ...userWithoutPassword } = foundUser;
-        const userWithLastLogin = {
-          ...userWithoutPassword,
-          lastLogin: new Date().toISOString(),
-        };
-        setUser(userWithLastLogin);
+      if (authUser) {
+        const user = convertAuthUser(authUser);
+        setUser(user);
         return true;
       }
 
@@ -159,38 +132,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     email: string;
     phone: string;
     password: string;
+    userType: UserType;
+    department?: string;
+    employeeId?: string;
+    role?: "super_admin" | "admin" | "moderator";
   }): Promise<boolean> => {
     setIsLoading(true);
 
     try {
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Check if user already exists
-      const existingUser = mockUsers.find(
-        (u) => u.email === userData.email || u.phone === userData.phone,
-      );
-
-      if (existingUser) {
-        return false; // User already exists
-      }
-
-      // Create new user
-      const newUser: User = {
-        id: `citizen-${Date.now()}`,
+      const registerData: RegisterData = {
         name: userData.name,
         email: userData.email,
         phone: userData.phone,
-        role: "citizen",
-        createdAt: new Date().toISOString(),
-        lastLogin: new Date().toISOString(),
+        password: userData.password,
+        userType: userData.userType,
+        department: userData.department,
+        employeeId: userData.employeeId,
+        role: userData.role,
       };
 
-      // Add to mock database (in real app, this would be an API call)
-      mockUsers.push({ ...newUser, password: userData.password } as any);
+      const authUser = await authService.register(registerData);
 
-      setUser(newUser);
-      return true;
+      if (authUser) {
+        const user = convertAuthUser(authUser);
+        setUser(user);
+        return true;
+      }
+
+      return false;
     } catch (error) {
       console.error("Registration error:", error);
       return false;
