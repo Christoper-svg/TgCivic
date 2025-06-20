@@ -24,6 +24,7 @@ import {
   User,
   Shield,
   Users,
+  ArrowLeft,
 } from "lucide-react";
 
 const Login = () => {
@@ -94,6 +95,18 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
+        {/* Back Button */}
+        <div className="flex justify-start">
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="text-gray-600 hover:text-gray-900 -ml-2"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back
+          </Button>
+        </div>
+
         {/* Header */}
         <div className="text-center">
           <div className="flex justify-center mb-4">
