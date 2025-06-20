@@ -291,7 +291,12 @@ const RegisterComplaint = () => {
         complaintId: id,
         userId: "all-admins", // Target all admin users
         userRole: "admin",
-        priority: formData.priority === "high" ? "high" : formData.priority === "medium" ? "medium" : "low",
+        priority:
+          formData.priority === "high"
+            ? "high"
+            : formData.priority === "medium"
+              ? "medium"
+              : "low",
         actionUrl: "/dashboard",
       });
 
@@ -775,6 +780,9 @@ const RegisterComplaint = () => {
               will review your complaint shortly. You can use this ID to track
               the progress of your complaint.
             </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
             <div className="bg-gray-50 rounded-lg p-4">
               <Label className="text-sm font-medium text-gray-700">
                 Your Complaint ID
@@ -794,6 +802,7 @@ const RegisterComplaint = () => {
                 </Button>
               </div>
             </div>
+
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <div className="flex items-start space-x-3">
                 <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5" />
@@ -803,10 +812,12 @@ const RegisterComplaint = () => {
                     <li>• Save this ID to track your complaint status</li>
                     <li>• You will receive SMS/Email updates</li>
                     <li>• Expected resolution within 3-5 working days</li>
+                    <li>• Admins have been notified automatically</li>
                   </ul>
                 </div>
               </div>
             </div>
+
             <div className="flex space-x-3">
               <Button
                 onClick={() => navigate("/track-complaint")}
