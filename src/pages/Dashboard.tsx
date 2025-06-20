@@ -32,6 +32,8 @@ const Dashboard = () => {
   const { user } = useAuth();
   const { complaints, getComplaintStats } = useComplaints();
   const { notifications, unreadCount } = useNotifications();
+  const { schemes, getTotalViews, getMostViewedScheme, getAllCategories } =
+    useSchemes();
   const [activeTab, setActiveTab] = useState("overview");
 
   // Redirect non-admin users
