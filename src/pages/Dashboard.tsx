@@ -1394,6 +1394,218 @@ const Dashboard = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Scheme Add/Edit Dialog */}
+      <Dialog open={showSchemeDialog} onOpenChange={setShowSchemeDialog}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {selectedScheme ? "Edit Scheme" : "Add New Scheme"}
+            </DialogTitle>
+            <DialogDescription>
+              {selectedScheme
+                ? "Update scheme information"
+                : "Create a new government scheme for citizens"}
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleSchemeSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="schemeName">Scheme Name *</Label>
+                <Input
+                  id="schemeName"
+                  value={schemeForm.name}
+                  onChange={(e) =>
+                    setSchemeForm({ ...schemeForm, name: e.target.value })
+                  }
+                  placeholder="e.g., Rythu Bandhu"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="schemeCategory">Category *</Label>
+                <Select
+                  value={schemeForm.category}
+                  onValueChange={(value) =>
+                    setSchemeForm({ ...schemeForm, category: value })
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map((category) => (
+                      <SelectItem key={category} value={category}>
+                        {category}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="schemeDescription">Description *</Label>
+              <Textarea
+                id="schemeDescription"
+                value={schemeForm.description}
+                onChange={(e) =>
+                  setSchemeForm({ ...schemeForm, description: e.target.value })
+                }
+                placeholder="Brief description of the scheme"
+                rows={3}
+                required
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="schemeBenefits">Benefits *</Label>
+              <Textarea
+                id="schemeBenefits"
+                value={schemeForm.benefits}
+                onChange={(e) =>
+                  setSchemeForm({ ...schemeForm, benefits: e.target.value })
+                }
+                placeholder="What benefits does this scheme provide?"
+                rows={2}
+                required
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="schemeDepartment">Department *</Label>
+                <Input
+                  id="schemeDepartment"
+                  value={schemeForm.department}
+                  onChange={(e) =>
+                    setSchemeForm({ ...schemeForm, department: e.target.value })
+                  }
+                  placeholder="e.g., Agriculture Department"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="schemeValidUntil">Valid Until</Label>
+                <Input
+                  id="schemeValidUntil"
+                  type="date"
+                  value={schemeForm.validUntil}
+                  onChange={(e) =>
+                    setSchemeForm({ ...schemeForm, validUntil: e.target.value })
+                  }
+                />
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="schemeApplyLink">Application Link *</Label>
+              <Input
+                id="schemeApplyLink"
+                type="url"
+                value={schemeForm.applyLink}
+                onChange={(e) =>
+                  setSchemeForm({ ...schemeForm, applyLink: e.target.value })
+                }
+                placeholder="https://example.gov.in/apply"
+                required
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="schemeEligibility">
+                Eligibility Criteria (one per line)
+              </Label>
+              <Textarea
+                id="schemeEligibility"
+                value={schemeForm.eligibility}
+                onChange={(e) =>
+                  setSchemeForm({ ...schemeForm, eligibility: e.target.value })
+                }
+                placeholder="Must be a farmer with valid land records&#10;Should be a resident of Telangana"
+                rows={4}
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="schemeDocuments">
+                Required Documents (one per line)
+              </Label>
+              <Textarea
+                id="schemeDocuments"
+                value={schemeForm.requiredDocuments}
+                onChange={(e) =>
+                  setSchemeForm({
+                    ...schemeForm,
+                    requiredDocuments: e.target.value,
+                  })
+                }
+                placeholder="Aadhaar Card&#10;Land Revenue Records&#10;Bank Account Details"
+                rows={4}
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="schemeProcess">Application Process</Label>
+              <Textarea
+                id="schemeProcess"
+                value={schemeForm.applicationProcess}
+                onChange={(e) =>
+                  setSchemeForm({
+                    ...schemeForm,
+                    applicationProcess: e.target.value,
+                  })
+                }
+                placeholder="How to apply for this scheme..."
+                rows={3}
+              />
+            </div>
+
+            <div className="flex gap-3 pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowSchemeDialog(false)}
+                className="flex-1"
+              >
+                <X className="w-4 h-4 mr-2" />
+                Cancel
+              </Button>
+              <Button type="submit" className="flex-1">
+                <Save className="w-4 h-4 mr-2" />
+                {selectedScheme ? "Update Scheme" : "Create Scheme"}
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Scheme Confirmation Dialog */}
+      <AlertDialog
+        open={showDeleteSchemeDialog}
+        onOpenChange={setShowDeleteSchemeDialog}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Scheme</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete the scheme "{selectedScheme?.name}
+              "? This action cannot be undone and will remove all associated
+              data.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDeleteScheme}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              Delete Scheme
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
