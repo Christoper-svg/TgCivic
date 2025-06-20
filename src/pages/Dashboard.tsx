@@ -30,12 +30,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -94,13 +89,8 @@ const Dashboard = () => {
     getComplaintStats,
     getComplaintsByCategory,
   } = useComplaints();
-  const {
-    schemes,
-    addScheme,
-    updateScheme,
-    deleteScheme,
-    toggleSchemeStatus,
-  } = useSchemes();
+  const { schemes, addScheme, updateScheme, deleteScheme, toggleSchemeStatus } =
+    useSchemes();
 
   // State management
   const [selectedComplaint, setSelectedComplaint] = useState<Complaint | null>(
@@ -118,7 +108,9 @@ const Dashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Scheme management state
-  const [currentTab, setCurrentTab] = useState<"complaints" | "schemes">("complaints");
+  const [currentTab, setCurrentTab] = useState<"complaints" | "schemes">(
+    "complaints",
+  );
   const [showSchemeDialog, setShowSchemeDialog] = useState(false);
   const [selectedScheme, setSelectedScheme] = useState<any>(null);
   const [showDeleteSchemeDialog, setShowDeleteSchemeDialog] = useState(false);
@@ -424,8 +416,12 @@ const Dashboard = () => {
       name: schemeForm.name,
       description: schemeForm.description,
       category: schemeForm.category,
-      eligibility: schemeForm.eligibility.split('\n').filter(item => item.trim()),
-      requiredDocuments: schemeForm.requiredDocuments.split('\n').filter(item => item.trim()),
+      eligibility: schemeForm.eligibility
+        .split("\n")
+        .filter((item) => item.trim()),
+      requiredDocuments: schemeForm.requiredDocuments
+        .split("\n")
+        .filter((item) => item.trim()),
       benefits: schemeForm.benefits,
       applicationProcess: schemeForm.applicationProcess,
       applyLink: schemeForm.applyLink,
@@ -454,7 +450,7 @@ const Dashboard = () => {
     "Housing",
     "Women & Child Development",
     "Senior Citizens",
-    "Disabled Welfare"
+    "Disabled Welfare",
   ];
 
   return (
@@ -553,7 +549,13 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content Tabs */}
-        <Tabs value={currentTab} onValueChange={(value: "complaints" | "schemes") => setCurrentTab(value)} className="space-y-6">
+        <Tabs
+          value={currentTab}
+          onValueChange={(value: "complaints" | "schemes") =>
+            setCurrentTab(value)
+          }
+          className="space-y-6"
+        >
           <TabsList className="grid w-full grid-cols-2 max-w-md">
             <TabsTrigger value="complaints" className="flex items-center gap-2">
               <FileText className="w-4 h-4" />
@@ -571,202 +573,319 @@ const Dashboard = () => {
           <TabsContent value="complaints" className="space-y-6">
             {/* Admin Controls */}
             {isAdmin && (
-          <Card className="mb-6 bg-red-50 border-red-200">
-            <CardHeader className="pb-3 sm:pb-6">
-              <CardTitle className="flex items-center gap-2 text-red-900 text-base sm:text-lg">
-                <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
-                Platform Controls
-              </CardTitle>
-              <CardDescription className="text-red-700 text-sm">
-                Administrative actions with system-wide impact
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowCleanupDialog(true)}
-                  className="border-red-300 text-red-700 hover:bg-red-100 justify-start h-10 text-xs sm:text-sm"
-                >
-                  <Archive className="w-4 h-4 mr-2 flex-shrink-0" />
-                  <span className="truncate">Remove All Resolved</span>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={exportData}
-                  className="border-blue-300 text-blue-700 hover:bg-blue-100 justify-start h-10 text-xs sm:text-sm"
-                >
-                  <Download className="w-4 h-4 mr-2 flex-shrink-0" />
-                  <span className="truncate">Export Data</span>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => window.location.reload()}
-                  className="border-gray-300 text-gray-700 hover:bg-gray-100 justify-start h-10 text-xs sm:text-sm"
-                >
-                  <RefreshCw className="w-4 h-4 mr-2 flex-shrink-0" />
-                  <span className="truncate">Refresh Data</span>
-                </Button>
-                {selectedComplaints.length > 0 && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setBulkDialog(true)}
-                    className="border-purple-300 text-purple-700 hover:bg-purple-100 justify-start h-10 text-xs sm:text-sm sm:col-span-2 lg:col-span-1"
-                  >
-                    <Settings className="w-4 h-4 mr-2 flex-shrink-0" />
-                    <span className="truncate">
-                      Bulk Actions ({selectedComplaints.length})
-                    </span>
-                  </Button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        )}
+              <Card className="mb-6 bg-red-50 border-red-200">
+                <CardHeader className="pb-3 sm:pb-6">
+                  <CardTitle className="flex items-center gap-2 text-red-900 text-base sm:text-lg">
+                    <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
+                    Platform Controls
+                  </CardTitle>
+                  <CardDescription className="text-red-700 text-sm">
+                    Administrative actions with system-wide impact
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowCleanupDialog(true)}
+                      className="border-red-300 text-red-700 hover:bg-red-100 justify-start h-10 text-xs sm:text-sm"
+                    >
+                      <Archive className="w-4 h-4 mr-2 flex-shrink-0" />
+                      <span className="truncate">Remove All Resolved</span>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={exportData}
+                      className="border-blue-300 text-blue-700 hover:bg-blue-100 justify-start h-10 text-xs sm:text-sm"
+                    >
+                      <Download className="w-4 h-4 mr-2 flex-shrink-0" />
+                      <span className="truncate">Export Data</span>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => window.location.reload()}
+                      className="border-gray-300 text-gray-700 hover:bg-gray-100 justify-start h-10 text-xs sm:text-sm"
+                    >
+                      <RefreshCw className="w-4 h-4 mr-2 flex-shrink-0" />
+                      <span className="truncate">Refresh Data</span>
+                    </Button>
+                    {selectedComplaints.length > 0 && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setBulkDialog(true)}
+                        className="border-purple-300 text-purple-700 hover:bg-purple-100 justify-start h-10 text-xs sm:text-sm sm:col-span-2 lg:col-span-1"
+                      >
+                        <Settings className="w-4 h-4 mr-2 flex-shrink-0" />
+                        <span className="truncate">
+                          Bulk Actions ({selectedComplaints.length})
+                        </span>
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
-        {/* Filters */}
-        <Card className="mb-6">
-          <CardHeader className="pb-3 sm:pb-6">
-            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
-              <Filter className="w-4 h-4 sm:w-5 sm:h-5" />
-              Filters & Search
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <div className="space-y-4">
-              {/* Search - Full width on mobile */}
-              <div>
-                <Label className="text-sm font-medium">Search</Label>
-                <div className="relative mt-1">
-                  <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <Input
-                    placeholder="ID, Title, Name, Phone..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 h-10 text-sm"
-                  />
-                </div>
-              </div>
-
-              {/* Filters Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                <div>
-                  <Label className="text-sm font-medium">Status</Label>
-                  <Select value={filterStatus} onValueChange={setFilterStatus}>
-                    <SelectTrigger className="h-10 text-sm mt-1">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Status</SelectItem>
-                      <SelectItem value="pending">Pending</SelectItem>
-                      <SelectItem value="assigned">Assigned</SelectItem>
-                      <SelectItem value="in-progress">In Progress</SelectItem>
-                      <SelectItem value="resolved">Resolved</SelectItem>
-                      <SelectItem value="closed">Closed</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label className="text-sm font-medium">Priority</Label>
-                  <Select
-                    value={filterPriority}
-                    onValueChange={setFilterPriority}
-                  >
-                    <SelectTrigger className="h-10 text-sm mt-1">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Priority</SelectItem>
-                      <SelectItem value="high">High</SelectItem>
-                      <SelectItem value="medium">Medium</SelectItem>
-                      <SelectItem value="low">Low</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label className="text-sm font-medium">Category</Label>
-                  <Select
-                    value={filterCategory}
-                    onValueChange={setFilterCategory}
-                  >
-                    <SelectTrigger className="h-10 text-sm mt-1">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Categories</SelectItem>
-                      <SelectItem value="roads">Roads</SelectItem>
-                      <SelectItem value="water">Water</SelectItem>
-                      <SelectItem value="sanitation">Sanitation</SelectItem>
-                      <SelectItem value="electricity">Electricity</SelectItem>
-                      <SelectItem value="streetlights">
-                        Street Lights
-                      </SelectItem>
-                      <SelectItem value="safety">Safety</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="flex items-end">
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setFilterStatus("all");
-                      setFilterPriority("all");
-                      setFilterCategory("all");
-                      setSearchTerm("");
-                    }}
-                    className="w-full h-10 text-sm"
-                  >
-                    Clear All
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Complaints List */}
-        <Card>
-          <CardHeader className="pb-3 sm:pb-6">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-              <div>
+            {/* Filters */}
+            <Card className="mb-6">
+              <CardHeader className="pb-3 sm:pb-6">
                 <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
-                  <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
-                  Complaints ({filteredComplaints.length})
+                  <Filter className="w-4 h-4 sm:w-5 sm:h-5" />
+                  Filters & Search
                 </CardTitle>
-                <CardDescription className="text-sm">
-                  Manage and resolve citizen complaints
-                </CardDescription>
-              </div>
-              {isAdmin && filteredComplaints.length > 0 && (
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    checked={
-                      selectedComplaints.length === filteredComplaints.length
-                    }
-                    onCheckedChange={handleSelectAll}
-                  />
-                  <Label className="text-sm">Select All</Label>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="space-y-4">
+                  {/* Search - Full width on mobile */}
+                  <div>
+                    <Label className="text-sm font-medium">Search</Label>
+                    <div className="relative mt-1">
+                      <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                      <Input
+                        placeholder="ID, Title, Name, Phone..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="pl-10 h-10 text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Filters Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                    <div>
+                      <Label className="text-sm font-medium">Status</Label>
+                      <Select
+                        value={filterStatus}
+                        onValueChange={setFilterStatus}
+                      >
+                        <SelectTrigger className="h-10 text-sm mt-1">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Status</SelectItem>
+                          <SelectItem value="pending">Pending</SelectItem>
+                          <SelectItem value="assigned">Assigned</SelectItem>
+                          <SelectItem value="in-progress">
+                            In Progress
+                          </SelectItem>
+                          <SelectItem value="resolved">Resolved</SelectItem>
+                          <SelectItem value="closed">Closed</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-sm font-medium">Priority</Label>
+                      <Select
+                        value={filterPriority}
+                        onValueChange={setFilterPriority}
+                      >
+                        <SelectTrigger className="h-10 text-sm mt-1">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Priority</SelectItem>
+                          <SelectItem value="high">High</SelectItem>
+                          <SelectItem value="medium">Medium</SelectItem>
+                          <SelectItem value="low">Low</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-sm font-medium">Category</Label>
+                      <Select
+                        value={filterCategory}
+                        onValueChange={setFilterCategory}
+                      >
+                        <SelectTrigger className="h-10 text-sm mt-1">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Categories</SelectItem>
+                          <SelectItem value="roads">Roads</SelectItem>
+                          <SelectItem value="water">Water</SelectItem>
+                          <SelectItem value="sanitation">Sanitation</SelectItem>
+                          <SelectItem value="electricity">
+                            Electricity
+                          </SelectItem>
+                          <SelectItem value="streetlights">
+                            Street Lights
+                          </SelectItem>
+                          <SelectItem value="safety">Safety</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="flex items-end">
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setFilterStatus("all");
+                          setFilterPriority("all");
+                          setFilterCategory("all");
+                          setSearchTerm("");
+                        }}
+                        className="w-full h-10 text-sm"
+                      >
+                        Clear All
+                      </Button>
+                    </div>
+                  </div>
                 </div>
-              )}
-            </div>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <div className="space-y-3 sm:space-y-4">
-              {filteredComplaints.map((complaint) => (
-                <div
-                  key={complaint.id}
-                  className="border border-gray-200 rounded-lg hover:shadow-sm transition-shadow"
-                >
-                  {/* Mobile Layout */}
-                  <div className="block sm:hidden">
-                    <div className="p-3">
-                      {/* Header Row */}
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex items-center gap-2 min-w-0 flex-1">
+              </CardContent>
+            </Card>
+
+            {/* Complaints List */}
+            <Card>
+              <CardHeader className="pb-3 sm:pb-6">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                  <div>
+                    <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+                      <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
+                      Complaints ({filteredComplaints.length})
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                      Manage and resolve citizen complaints
+                    </CardDescription>
+                  </div>
+                  {isAdmin && filteredComplaints.length > 0 && (
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        checked={
+                          selectedComplaints.length ===
+                          filteredComplaints.length
+                        }
+                        onCheckedChange={handleSelectAll}
+                      />
+                      <Label className="text-sm">Select All</Label>
+                    </div>
+                  )}
+                </div>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <div className="space-y-3 sm:space-y-4">
+                  {filteredComplaints.map((complaint) => (
+                    <div
+                      key={complaint.id}
+                      className="border border-gray-200 rounded-lg hover:shadow-sm transition-shadow"
+                    >
+                      {/* Mobile Layout */}
+                      <div className="block sm:hidden">
+                        <div className="p-3">
+                          {/* Header Row */}
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center gap-2 min-w-0 flex-1">
+                              {isAdmin && (
+                                <Checkbox
+                                  checked={selectedComplaints.includes(
+                                    complaint.id,
+                                  )}
+                                  onCheckedChange={(checked) =>
+                                    handleComplaintSelect(
+                                      complaint.id,
+                                      checked as boolean,
+                                    )
+                                  }
+                                />
+                              )}
+                              <span className="font-mono text-xs text-blue-600 font-medium truncate">
+                                {complaint.id}
+                              </span>
+                            </div>
+                            <div className="flex gap-1 ml-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => viewComplaintDetails(complaint)}
+                                className="h-8 px-2"
+                              >
+                                <Eye className="w-3 h-3" />
+                              </Button>
+                              <Button
+                                size="sm"
+                                className="bg-blue-600 hover:bg-blue-700 h-8 px-2"
+                                onClick={() => takeAction(complaint)}
+                              >
+                                <Edit className="w-3 h-3" />
+                              </Button>
+                              {isAdmin && (
+                                <Button
+                                  variant="destructive"
+                                  size="sm"
+                                  onClick={() =>
+                                    deleteComplaintHandler(complaint)
+                                  }
+                                  className="h-8 px-2"
+                                >
+                                  <Trash2 className="w-3 h-3" />
+                                </Button>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Status and Priority */}
+                          <div className="flex flex-wrap gap-1 mb-2">
+                            <Badge
+                              variant="outline"
+                              className={`${getPriorityColor(complaint.priority)} text-xs`}
+                            >
+                              {complaint.priority.toUpperCase()}
+                            </Badge>
+                            <Badge
+                              className={`${getStatusColor(complaint.status)} text-xs`}
+                            >
+                              {getStatusIcon(complaint.status)}
+                              <span className="ml-1">
+                                {getStatusDisplayName(complaint.status)}
+                              </span>
+                            </Badge>
+                            <Badge variant="secondary" className="text-xs">
+                              {complaint.subcategory}
+                            </Badge>
+                          </div>
+
+                          {/* Title */}
+                          <h3 className="font-semibold text-gray-900 mb-2 text-sm leading-tight">
+                            {complaint.title}
+                          </h3>
+
+                          {/* Details */}
+                          <div className="space-y-1 text-xs text-gray-600">
+                            <div className="flex items-center gap-1">
+                              <MapPin className="w-3 h-3 flex-shrink-0" />
+                              <span className="truncate">
+                                {complaint.landmark ||
+                                  complaint.location.split(",")[0]}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <User className="w-3 h-3 flex-shrink-0" />
+                              <span className="truncate">{complaint.name}</span>
+                              <span className="text-gray-400">•</span>
+                              <Phone className="w-3 h-3 flex-shrink-0" />
+                              <span>{complaint.phone}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Calendar className="w-3 h-3 flex-shrink-0" />
+                              <span>{formatDate(complaint.createdAt)}</span>
+                            </div>
+                            {complaint.assignedTo && (
+                              <div className="flex items-center gap-1">
+                                <Building2 className="w-3 h-3 flex-shrink-0" />
+                                <span className="truncate">
+                                  {complaint.assignedTo}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Desktop Layout */}
+                      <div className="hidden sm:flex items-center justify-between p-4">
+                        <div className="flex items-center space-x-4 flex-1">
                           {isAdmin && (
                             <Checkbox
                               checked={selectedComplaints.includes(
@@ -780,210 +899,262 @@ const Dashboard = () => {
                               }
                             />
                           )}
-                          <span className="font-mono text-xs text-blue-600 font-medium truncate">
-                            {complaint.id}
-                          </span>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="font-mono text-sm text-blue-600 font-medium">
+                                {complaint.id}
+                              </span>
+                              <Badge
+                                variant="outline"
+                                className={getPriorityColor(complaint.priority)}
+                              >
+                                {complaint.priority.toUpperCase()}
+                              </Badge>
+                              <Badge
+                                className={getStatusColor(complaint.status)}
+                              >
+                                {getStatusIcon(complaint.status)}
+                                <span className="ml-1">
+                                  {getStatusDisplayName(complaint.status)}
+                                </span>
+                              </Badge>
+                            </div>
+
+                            <h3 className="font-semibold text-gray-900 mb-1">
+                              {complaint.title}
+                            </h3>
+
+                            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                              <div className="flex items-center gap-1">
+                                <MapPin className="w-4 h-4" />
+                                {complaint.landmark ||
+                                  complaint.location.split(",")[0]}
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <User className="w-4 h-4" />
+                                {complaint.name}
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Phone className="w-4 h-4" />
+                                {complaint.phone}
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Calendar className="w-4 h-4" />
+                                {formatDate(complaint.createdAt)}
+                              </div>
+                              <Badge variant="secondary">
+                                {complaint.subcategory}
+                              </Badge>
+                              {complaint.assignedTo && (
+                                <div className="flex items-center gap-1">
+                                  <Building2 className="w-4 h-4" />
+                                  {complaint.assignedTo}
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex gap-1 ml-2">
+
+                        <div className="flex items-center gap-2">
                           <Button
                             variant="outline"
                             size="sm"
                             onClick={() => viewComplaintDetails(complaint)}
-                            className="h-8 px-2"
                           >
-                            <Eye className="w-3 h-3" />
+                            <Eye className="w-4 h-4 mr-1" />
+                            View
                           </Button>
                           <Button
                             size="sm"
-                            className="bg-blue-600 hover:bg-blue-700 h-8 px-2"
+                            className="bg-blue-600 hover:bg-blue-700"
                             onClick={() => takeAction(complaint)}
                           >
-                            <Edit className="w-3 h-3" />
+                            <Edit className="w-4 h-4 mr-1" />
+                            Action
                           </Button>
                           {isAdmin && (
                             <Button
                               variant="destructive"
                               size="sm"
                               onClick={() => deleteComplaintHandler(complaint)}
-                              className="h-8 px-2"
                             >
-                              <Trash2 className="w-3 h-3" />
+                              <Trash2 className="w-4 h-4" />
                             </Button>
                           )}
                         </div>
                       </div>
+                    </div>
+                  ))}
 
-                      {/* Status and Priority */}
-                      <div className="flex flex-wrap gap-1 mb-2">
-                        <Badge
-                          variant="outline"
-                          className={`${getPriorityColor(complaint.priority)} text-xs`}
-                        >
-                          {complaint.priority.toUpperCase()}
-                        </Badge>
-                        <Badge
-                          className={`${getStatusColor(complaint.status)} text-xs`}
-                        >
-                          {getStatusIcon(complaint.status)}
-                          <span className="ml-1">
-                            {getStatusDisplayName(complaint.status)}
-                          </span>
-                        </Badge>
-                        <Badge variant="secondary" className="text-xs">
-                          {complaint.subcategory}
-                        </Badge>
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="font-semibold text-gray-900 mb-2 text-sm leading-tight">
-                        {complaint.title}
+                  {filteredComplaints.length === 0 && (
+                    <div className="text-center py-8">
+                      <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                      <h3 className="text-lg font-medium text-gray-900 mb-2">
+                        No complaints found
                       </h3>
-
-                      {/* Details */}
-                      <div className="space-y-1 text-xs text-gray-600">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3 flex-shrink-0" />
-                          <span className="truncate">
-                            {complaint.landmark ||
-                              complaint.location.split(",")[0]}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <User className="w-3 h-3 flex-shrink-0" />
-                          <span className="truncate">{complaint.name}</span>
-                          <span className="text-gray-400">•</span>
-                          <Phone className="w-3 h-3 flex-shrink-0" />
-                          <span>{complaint.phone}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3 flex-shrink-0" />
-                          <span>{formatDate(complaint.createdAt)}</span>
-                        </div>
-                        {complaint.assignedTo && (
-                          <div className="flex items-center gap-1">
-                            <Building2 className="w-3 h-3 flex-shrink-0" />
-                            <span className="truncate">
-                              {complaint.assignedTo}
-                            </span>
-                          </div>
-                        )}
-                      </div>
+                      <p className="text-gray-600">
+                        No complaints match the current filters.
+                      </p>
                     </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Schemes Tab */}
+          {isAdmin && (
+            <TabsContent value="schemes" className="space-y-6">
+              {/* Schemes Header */}
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <div>
+                    <CardTitle className="flex items-center gap-2">
+                      <Gift className="w-5 h-5" />
+                      Government Schemes Management
+                    </CardTitle>
+                    <CardDescription>
+                      Add, edit, and manage government schemes for citizens
+                    </CardDescription>
                   </div>
+                  <Button onClick={handleAddScheme}>
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Scheme
+                  </Button>
+                </CardHeader>
+              </Card>
 
-                  {/* Desktop Layout */}
-                  <div className="hidden sm:flex items-center justify-between p-4">
-                    <div className="flex items-center space-x-4 flex-1">
-                      {isAdmin && (
-                        <Checkbox
-                          checked={selectedComplaints.includes(complaint.id)}
-                          onCheckedChange={(checked) =>
-                            handleComplaintSelect(
-                              complaint.id,
-                              checked as boolean,
-                            )
-                          }
-                        />
-                      )}
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="font-mono text-sm text-blue-600 font-medium">
-                            {complaint.id}
-                          </span>
-                          <Badge
-                            variant="outline"
-                            className={getPriorityColor(complaint.priority)}
-                          >
-                            {complaint.priority.toUpperCase()}
-                          </Badge>
-                          <Badge className={getStatusColor(complaint.status)}>
-                            {getStatusIcon(complaint.status)}
-                            <span className="ml-1">
-                              {getStatusDisplayName(complaint.status)}
-                            </span>
-                          </Badge>
-                        </div>
-
-                        <h3 className="font-semibold text-gray-900 mb-1">
-                          {complaint.title}
-                        </h3>
-
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
-                          <div className="flex items-center gap-1">
-                            <MapPin className="w-4 h-4" />
-                            {complaint.landmark ||
-                              complaint.location.split(",")[0]}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <User className="w-4 h-4" />
-                            {complaint.name}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Phone className="w-4 h-4" />
-                            {complaint.phone}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
-                            {formatDate(complaint.createdAt)}
-                          </div>
-                          <Badge variant="secondary">
-                            {complaint.subcategory}
-                          </Badge>
-                          {complaint.assignedTo && (
-                            <div className="flex items-center gap-1">
-                              <Building2 className="w-4 h-4" />
-                              {complaint.assignedTo}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => viewComplaintDetails(complaint)}
-                      >
-                        <Eye className="w-4 h-4 mr-1" />
-                        View
-                      </Button>
-                      <Button
-                        size="sm"
-                        className="bg-blue-600 hover:bg-blue-700"
-                        onClick={() => takeAction(complaint)}
-                      >
-                        <Edit className="w-4 h-4 mr-1" />
-                        Action
-                      </Button>
-                      {isAdmin && (
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => deleteComplaintHandler(complaint)}
+              {/* Schemes List */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>
+                    Active Schemes ({schemes.filter((s) => s.isActive).length})
+                  </CardTitle>
+                  <CardDescription>
+                    Manage existing government schemes
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {schemes
+                      .filter((s) => s.isActive)
+                      .map((scheme) => (
+                        <div
+                          key={scheme.id}
+                          className="border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-shadow"
                         >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-2">
+                                <h3 className="font-semibold text-gray-900">
+                                  {scheme.name}
+                                </h3>
+                                <Badge variant="outline" className="text-xs">
+                                  {scheme.category}
+                                </Badge>
+                              </div>
+                              <p className="text-sm text-gray-600 mb-3">
+                                {scheme.description}
+                              </p>
 
-              {filteredComplaints.length === 0 && (
-                <div className="text-center py-8">
-                  <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">
-                    No complaints found
-                  </h3>
-                  <p className="text-gray-600">
-                    No complaints match the current filters.
-                  </p>
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                  <Label className="text-xs font-medium text-gray-700">
+                                    Benefits
+                                  </Label>
+                                  <p className="text-gray-600">
+                                    {scheme.benefits}
+                                  </p>
+                                </div>
+                                <div>
+                                  <Label className="text-xs font-medium text-gray-700">
+                                    Department
+                                  </Label>
+                                  <p className="text-gray-600">
+                                    {scheme.department}
+                                  </p>
+                                </div>
+                                <div>
+                                  <Label className="text-xs font-medium text-gray-700">
+                                    Apply Link
+                                  </Label>
+                                  <div className="flex items-center gap-2">
+                                    <a
+                                      href={scheme.applyLink}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-blue-600 hover:text-blue-800 text-xs truncate max-w-[200px]"
+                                    >
+                                      {scheme.applyLink}
+                                    </a>
+                                    <ExternalLink className="w-3 h-3 text-gray-400" />
+                                  </div>
+                                </div>
+                                <div>
+                                  <Label className="text-xs font-medium text-gray-700">
+                                    Applicants
+                                  </Label>
+                                  <p className="text-gray-600">
+                                    {scheme.applicantCount || 0}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="flex gap-2 ml-4">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleEditScheme(scheme)}
+                              >
+                                <Edit className="w-4 h-4 mr-1" />
+                                Edit
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => toggleSchemeStatus(scheme.id)}
+                                className={
+                                  scheme.isActive
+                                    ? "border-yellow-300 text-yellow-700 hover:bg-yellow-50"
+                                    : "border-green-300 text-green-700 hover:bg-green-50"
+                                }
+                              >
+                                {scheme.isActive ? "Deactivate" : "Activate"}
+                              </Button>
+                              <Button
+                                variant="destructive"
+                                size="sm"
+                                onClick={() => handleDeleteScheme(scheme)}
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                    {schemes.filter((s) => s.isActive).length === 0 && (
+                      <div className="text-center py-8">
+                        <Gift className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                        <h3 className="text-lg font-medium text-gray-900 mb-2">
+                          No schemes available
+                        </h3>
+                        <p className="text-gray-600 mb-4">
+                          Start by adding your first government scheme.
+                        </p>
+                        <Button onClick={handleAddScheme}>
+                          <Plus className="w-4 h-4 mr-2" />
+                          Add First Scheme
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          )}
+        </Tabs>
       </div>
 
       {/* Complaint Details Dialog */}
