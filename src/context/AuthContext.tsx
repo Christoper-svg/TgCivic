@@ -5,28 +5,45 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
+import {
+  authService,
+  AuthUser,
+  UserType,
+  RegisterData,
+  LoginData,
+} from "@/services/authService";
 
 export interface User {
   id: string;
   name: string;
   email: string;
   phone: string;
-  role: "citizen" | "admin" | "official";
+  userType: "citizen" | "admin";
+  role?: string;
   department?: string;
+  isActive?: boolean;
   createdAt: string;
-  lastLogin: string;
+  lastLogin?: string;
 }
 
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (
+    email: string,
+    password: string,
+    userType: UserType,
+  ) => Promise<boolean>;
   register: (userData: {
     name: string;
     email: string;
     phone: string;
     password: string;
+    userType: UserType;
+    department?: string;
+    employeeId?: string;
+    role?: "super_admin" | "admin" | "moderator";
   }) => Promise<boolean>;
   logout: () => void;
   updateProfile: (updates: Partial<User>) => void;
