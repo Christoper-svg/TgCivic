@@ -110,7 +110,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     try {
       const loginData: LoginData = { email, password, userType };
-      const authUser = await authService.login(loginData);
+      const authUser = await clientStorageService.login(loginData);
 
       if (authUser) {
         const user = convertAuthUser(authUser);
@@ -151,7 +151,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         role: userData.role,
       };
 
-      const authUser = await authService.register(registerData);
+      const authUser = await clientStorageService.register(registerData);
 
       if (authUser) {
         const user = convertAuthUser(authUser);
