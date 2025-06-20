@@ -581,16 +581,35 @@ const RegisterComplaint = () => {
                   }
                   placeholder="Address or latitude, longitude"
                   className="flex-1"
+                  required
                 />
                 <Button
                   type="button"
                   variant="outline"
                   onClick={getCurrentLocation}
+                  disabled={isGettingLocation}
+                  className="min-w-fit"
                 >
-                  <MapPin className="w-4 h-4 mr-2" />
-                  My Location
+                  {isGettingLocation ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Getting...
+                    </>
+                  ) : (
+                    <>
+                      <Navigation className="w-4 h-4 mr-2" />
+                      GPS
+                    </>
+                  )}
                 </Button>
               </div>
+              {formData.latitude && formData.longitude && (
+                <p className="text-xs text-green-600 flex items-center gap-1">
+                  <MapPin className="w-3 h-3" />
+                  GPS: {formData.latitude.toFixed(6)},{" "}
+                  {formData.longitude.toFixed(6)}
+                </p>
+              )}
 
               <div>
                 <Label htmlFor="landmark">Nearby Landmark</Label>
