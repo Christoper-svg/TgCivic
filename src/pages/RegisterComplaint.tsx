@@ -291,12 +291,7 @@ const RegisterComplaint = () => {
         complaintId: id,
         userId: "all-admins", // Target all admin users
         userRole: "admin",
-        priority:
-          formData.priority === "high"
-            ? "high"
-            : formData.priority === "medium"
-              ? "medium"
-              : "low",
+        priority: formData.priority === "high" ? "high" : formData.priority === "medium" ? "medium" : "low",
         actionUrl: "/dashboard",
       });
 
@@ -774,11 +769,12 @@ const RegisterComplaint = () => {
               <CheckCircle2 className="w-6 h-6" />
               Complaint Registered Successfully!
             </DialogTitle>
-            <DialogDescription>
-              Your complaint has been registered and assigned a tracking ID.
+            <DialogDescription className="text-gray-600 text-center">
+              Your complaint has been successfully registered and assigned a
+              unique tracking ID. Admins have been automatically notified and
+              will review your complaint shortly. You can use this ID to track
+              the progress of your complaint.
             </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4">
             <div className="bg-gray-50 rounded-lg p-4">
               <Label className="text-sm font-medium text-gray-700">
                 Your Complaint ID
