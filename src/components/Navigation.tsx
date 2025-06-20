@@ -92,7 +92,7 @@ const Navigation = () => {
     },
     {
       href: "/schemes",
-      label: "Schemes",
+      label: t("schemes"),
       icon: <Gift className="w-4 h-4" />,
     },
     {
