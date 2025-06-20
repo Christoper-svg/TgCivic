@@ -6,12 +6,12 @@ import React, {
   ReactNode,
 } from "react";
 import {
-  authService,
+  clientStorageService,
   AuthUser,
   UserType,
   RegisterData,
   LoginData,
-} from "@/services/authService";
+} from "@/services/clientStorage";
 
 export interface User {
   id: string;
