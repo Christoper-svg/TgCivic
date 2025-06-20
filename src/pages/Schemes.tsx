@@ -24,10 +24,19 @@ import {
 } from "lucide-react";
 
 const Schemes = () => {
-  const { schemes, getAllCategories, searchSchemes } = useSchemes();
+  const { schemes, getAllCategories, searchSchemes, incrementViews } =
+    useSchemes();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [filteredSchemes, setFilteredSchemes] = useState(schemes);
+  const [selectedScheme, setSelectedScheme] = useState<Scheme | null>(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+
+  const handleSchemeClick = (scheme: Scheme) => {
+    setSelectedScheme(scheme);
+    setIsDetailModalOpen(true);
+    incrementViews(scheme.id);
+  };
 
   React.useEffect(() => {
     let result = schemes;
